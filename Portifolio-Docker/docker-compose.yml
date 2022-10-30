@@ -8,37 +8,6 @@ x-deploy: &template-deploy
     parallelism: 1
     delay: 10s
 
-services:
-  traefik:
-    image: traefik:v2.2.1
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-      update_config:
-        parallelism: 1
-        delay: 10s
-
-      labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.nginx.entrypoints=web"
-      - "traefik.http.routers.nginx.rule=Host(`traefik.local`)"
-    ports:
-      - "80:80"
-      - "843:443"
-    networks:
-      - "app-network"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    command:
-      - "--api=true"
-      - "--log.level=DEBUG"
-      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
-      - "--providers.docker.swarmMode=false"
-      - "--providers.file.directory=/etc/traefik/dynamic"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-
   web:
     image: httpd:alpine3.16
     networks:
@@ -48,10 +17,9 @@ services:
     deploy: 
       <<: *template-deploy
       replicas: 1
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.nginx.entrypoints=web"
-      - "traefik.http.routers.nginx.rule=Host(`portifolio.local`)"
+    ports:
+      - "80:80"
+      - "843:443"
 networks: 
   app-network:
     external: true
