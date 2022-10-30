@@ -3,11 +3,12 @@ version: "3.5"
 x-deploy: &template-deploy
   replicas: 1
   restart_policy:
-    condition: any
+    condition: always
   update_config:
     parallelism: 1
     delay: 10s
 
+services:
   web:
     image: httpd:alpine3.16
     networks:
