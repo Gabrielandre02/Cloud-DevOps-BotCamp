@@ -18,19 +18,16 @@ services:
       update_config:
         parallelism: 1
         delay: 10s
-      placement:
-        constraints:
-          - node.role == manager
+
       labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.traefik.rule=Host(`traefik.local`)"
-        - "traefik.http.services.justAdummyService.loadbalancer.server.port=1337"
-        - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=web"
+      - "traefik.http.routers.nginx.rule=Host(`traefik.local`)"
     ports:
       - "80:80"
       - "843:443"
     networks:
-      - "app-network"
+      - "monitoring-network"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command:
@@ -51,11 +48,10 @@ services:
     deploy: 
       <<: *template-deploy
       replicas: 1
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.zbx-frontend.entrypoints=web"
-        - "traefik.http.routers.zbx-frontend.rule=Host(`portifolio.local`)"
-        - "traefik.http.services.zbx-frontend.loadbalancer.server.port=8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=web"
+      - "traefik.http.routers.nginx.rule=Host(`portifolio.local`)"
 networks: 
   app-network:
     external: false
