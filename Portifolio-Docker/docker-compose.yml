@@ -27,7 +27,7 @@ services:
       - "80:80"
       - "843:443"
     networks:
-      - "monitoring-network"
+      - "app-network"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command:
