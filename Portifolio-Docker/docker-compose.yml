@@ -16,7 +16,6 @@ x-deploy: &template-deploy
       - '/data/app:/usr/local/apache2/htdocs/'      
     deploy: 
       <<: *template-deploy
-      replicas: 1
     ports:
       - "80:80"
       - "843:443"
