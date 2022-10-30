@@ -22,4 +22,3 @@ services:
       - "843:443"
 networks: 
   app-network:
-    external: false
