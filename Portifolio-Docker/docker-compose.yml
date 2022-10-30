@@ -22,4 +22,4 @@ x-deploy: &template-deploy
       - "843:443"
 networks: 
   app-network:
-    external: true
+    external: false
