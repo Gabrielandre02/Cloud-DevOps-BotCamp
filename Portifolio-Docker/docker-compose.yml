@@ -54,4 +54,4 @@ services:
       - "traefik.http.routers.nginx.rule=Host(`portifolio.local`)"
 networks: 
   app-network:
-    external: false
+    external: true
