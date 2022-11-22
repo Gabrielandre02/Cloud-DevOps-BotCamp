@@ -7,10 +7,10 @@ metadata:
 spec:
   containers:
     - name: app-html
-      image: zabbix/zabbix-server-mysql:alpine-trunk
+      image: httpd:latest
       resources:
         limits:
           memory: "128Mi"
           cpu: "500m"
       ports:
-        - containerPort: 10050
+        - containerPort: 80
