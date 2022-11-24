@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Gabriel</title>
+
+    <!-- ======== importando java script ========== -->
+    <script type="text/javascript" src="/Js/vanilla-tilt.js"></script>
+    <script type="text/javascript" src="/Js/menu.js"></script>
+    <script type="text/javascript" src="/Js/script.js"></script>
+
+    <!--====== CSS FILES ======== -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!--====== Bootstrap ======== -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <!-- ======== Menu ========== -->
+  
+  <div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <div class="overlay-content">
+      <a href="/html/index.html">Home</a>
+      <a href="/html/sobremim.html">Sobre Mim</a>
+      <a href="/html/portifolio.html">Portfolio</a>
+      <a href="/html/contato.html">Contato</a>
+    </div>
+  </div>
+  <!-- ======== botao menu ========== -->
+
+  <button class="nav-button" onclick="openNav()">
+    <i class="fa-solid fa-bars fa-2x"></i>
+  </button>
+
+<!-- ======== caixas pagina inicial ========== -->
+  <div>
+    <h1 class="bv">Seja Bem Vindo ao meu Portfólio</h1>
+  </div>
+  <div class="container">
+    <div class="profile caixa">
+      <h1 class="title">Gabriel A. M. Carmo</h1>
+        <span>CURITIBA, Brasil</span>
+          <p> DEVOPS | ENGENHEIRO SOFTWARE | ZABBIX </p>
+            <ul class="redes-sociais">
+              <li>
+                <a href="https://github.com/Gabrielandre02"><img src="/image/github.png" alt="github" /></a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/gabriel-andre-01429a213/"><img src="/image/linkedin.png" alt="linkedin" /></a>
+              </li>
+              <li>
+                <a href="https://medium.com/@andre-carmo02"><img src="/image/medium.png" alt="Medium" /></a>
+              </li>
+            </ul>
+  </div>
+
+
+<!-- ======== chamando script efeito digitando ========== -->
+
+<script>
+typeWrite(document.querySelector('span'));
+typeWrite(document.querySelector('p'));
+typeWrite(document.querySelector('h1'));
+</script>
+
+<!-- ======== Efeito Box se Movendo ========== -->
+
+    <script >
+      VanillaTilt.init(document.querySelectorAll(".caixa"),
+      {
+          max: 25,
+          speed:400,
+          "max-glare":1,
+        });
+    </script>
+
+  <!-- ======== rodape ========== -->
+  <footer>
+    <div>
+      <p class="copyright">© 2022 Gabriel Andre</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
