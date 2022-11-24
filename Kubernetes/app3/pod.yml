@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
   - name: myapp-php
-    image: andrecarmo02/myapp3:1.0
+    image: andrecarmo02/app3:1.0
     ports:
     - containerPort: 80
