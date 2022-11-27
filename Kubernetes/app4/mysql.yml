@@ -15,7 +15,7 @@ spec:
         value: "Senha123"
     resources:
       limits:
-        memory: "1g"
+        memory: "1000m"
         cpu: "500m"
     ports:
       - containerPort: 3306
