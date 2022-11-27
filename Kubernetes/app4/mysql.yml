@@ -13,9 +13,5 @@ spec:
         value: "meuBanco"
       - name: "MYSQL_ROOT_PASSWORD"
         value: "Senha123"
-    resources:
-      limits:
-        memory: "1000m"
-        cpu: "500m"
     ports:
       - containerPort: 3306
