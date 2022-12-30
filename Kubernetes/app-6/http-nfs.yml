@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: PersistentVolume 
+metadata:
+  name: fileserver-http
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: "/mnt/data_kube"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fileserver-http
+spec:
+  storageClassName: manual
+  volumeName: fileserver-http
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+        - image: httpd:latest
+          name: httpd
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: fileserver-http
+              mountPath: "/usr/local/apache2/htdocs/"
+      volumes:
+        - name: fileserver-http
+          persistentVolumeClaim:
+            claimName: fileserver-http

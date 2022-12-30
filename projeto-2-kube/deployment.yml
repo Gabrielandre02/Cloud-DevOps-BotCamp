@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc
+spec:
+  storageClassName: nfs-rwx-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - image: andrecarmo02/projeto-database:1.0
+          name: mysql
+          args:
+          - "--ignore-db-dir=lost+found"
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: nfs-pvc
+              mountPath: "/var/lib/mysql"
+      volumes:
+        - name: nfs-pvc
+          persistentVolumeClaim:
+            claimName: nfs-pvc
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+        - image: andrecarmo02/projeto-backend:1.0
+          name: php
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
